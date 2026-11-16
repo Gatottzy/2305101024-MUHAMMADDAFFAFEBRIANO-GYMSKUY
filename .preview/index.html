@@ -1,0 +1,1209 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <title>GYMSKUY — Preview Aplikasi Mobile</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@600;700&family=Plus+Jakarta+Sans:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #f5f6fa;
+        --surface: #ffffff;
+        --surface-variant: #eceef6;
+        --primary: #4f46e5;
+        --primary-dark: #3730a3;
+        --primary-container: #e0e7ff;
+        --on-primary-container: #1e1b4b;
+        --secondary: #0d9488;
+        --secondary-container: #ccfbf1;
+        --on-secondary-container: #134e4a;
+        --tertiary: #d97706;
+        --text: #111827;
+        --text-muted: #4b5563;
+        --outline: #e5e7eb;
+        --error: #dc2626;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      body {
+        font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+      }
+
+      .app-shell {
+        width: 100%;
+        max-width: 480px;
+        min-height: 100vh;
+        background: var(--bg);
+        display: flex;
+        flex-direction: column;
+        position: relative;
+      }
+
+      @media (min-width: 640px) {
+        body {
+          background: #e9ecf5;
+          padding: 20px 16px;
+        }
+        .app-shell {
+          min-height: calc(100vh - 40px);
+          max-height: 880px;
+          border-radius: 32px;
+          overflow: hidden;
+          box-shadow: 0 24px 60px rgba(17, 24, 39, 0.14);
+          border: 1px solid rgba(17, 24, 39, 0.08);
+        }
+      }
+
+      .scroll-content {
+        flex: 1;
+        overflow-y: auto;
+        padding: 16px;
+        padding-bottom: 92px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .scroll-content.no-nav {
+        padding-bottom: 24px;
+      }
+
+      h1, h2, h3 {
+        font-family: "Plus Jakarta Sans", "DM Sans", sans-serif;
+      }
+
+      .brand-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .brand-title {
+        font-size: 24px;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+
+      .subtitle {
+        font-size: 13px;
+        color: var(--text-muted);
+        margin-top: 2px;
+      }
+
+      .avatar-badge {
+        width: 44px;
+        height: 44px;
+        border-radius: 999px;
+        background: var(--primary-container);
+        color: var(--on-primary-container);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .hero-card {
+        border-radius: 22px;
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        color: #ffffff;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .hero-tag {
+        align-self: flex-start;
+        font-size: 11px;
+        font-weight: 600;
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.18);
+      }
+
+      .hero-title {
+        font-size: 21px;
+        font-weight: 700;
+        line-height: 1.25;
+      }
+
+      .hero-desc {
+        font-size: 13.5px;
+        line-height: 1.45;
+        color: rgba(255, 255, 255, 0.88);
+      }
+
+      .hero-btn {
+        align-self: flex-start;
+        margin-top: 4px;
+        min-height: 42px;
+        padding: 10px 16px;
+        border: none;
+        border-radius: 13px;
+        background: #ffffff;
+        color: var(--primary-dark);
+        font-weight: 600;
+        font-size: 14px;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .section-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .section-title {
+        font-size: 16px;
+        font-weight: 700;
+      }
+
+      .link-btn {
+        background: none;
+        border: none;
+        color: var(--primary);
+        font-weight: 600;
+        font-size: 13px;
+        cursor: pointer;
+        padding: 6px 8px;
+        min-height: 36px;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .stat-card {
+        background: var(--surface);
+        border-radius: 18px;
+        padding: 14px;
+        border: 1px solid var(--outline);
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .stat-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 12px;
+        color: var(--text-muted);
+        font-weight: 500;
+      }
+
+      .stat-icon {
+        width: 28px;
+        height: 28px;
+        border-radius: 9px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .stat-value {
+        font-size: 20px;
+        font-weight: 700;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .stat-sub {
+        font-size: 12px;
+        color: var(--text-muted);
+      }
+
+      .carousel {
+        display: flex;
+        gap: 10px;
+        overflow-x: auto;
+        padding-bottom: 4px;
+        scrollbar-width: none;
+      }
+      .carousel::-webkit-scrollbar {
+        display: none;
+      }
+
+      .quick-card {
+        min-width: 184px;
+        background: var(--surface);
+        border: 1px solid var(--outline);
+        border-radius: 18px;
+        padding: 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        cursor: pointer;
+        text-align: left;
+      }
+
+      .chip {
+        align-self: flex-start;
+        font-size: 11px;
+        font-weight: 600;
+        padding: 3px 9px;
+        border-radius: 8px;
+        background: var(--primary-container);
+        color: var(--on-primary-container);
+      }
+
+      .chip.teal {
+        background: var(--secondary-container);
+        color: var(--on-secondary-container);
+      }
+
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--outline);
+        border-radius: 18px;
+        padding: 14px;
+      }
+
+      .exercise-card {
+        width: 100%;
+        background: var(--surface);
+        border: 1px solid var(--outline);
+        border-radius: 18px;
+        padding: 14px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        cursor: pointer;
+        text-align: left;
+      }
+
+      .exercise-icon {
+        width: 46px;
+        height: 46px;
+        border-radius: 14px;
+        background: var(--primary-container);
+        color: var(--on-primary-container);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .exercise-body {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .exercise-name-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .exercise-name {
+        font-size: 15.5px;
+        font-weight: 700;
+      }
+
+      .exercise-meta {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--primary);
+        margin-top: 2px;
+      }
+
+      .exercise-desc {
+        font-size: 13px;
+        color: var(--text-muted);
+        margin-top: 4px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .search-wrap {
+        position: relative;
+        display: flex;
+        align-items: center;
+      }
+
+      .search-input {
+        width: 100%;
+        min-height: 48px;
+        border-radius: 16px;
+        border: 1px solid var(--outline);
+        background: var(--surface);
+        padding: 10px 40px 10px 40px;
+        font-size: 14.5px;
+        font-family: inherit;
+        color: var(--text);
+        outline: none;
+      }
+
+      .search-input:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.14);
+      }
+
+      .search-icon {
+        position: absolute;
+        left: 13px;
+        color: var(--text-muted);
+        pointer-events: none;
+      }
+
+      .clear-btn {
+        position: absolute;
+        right: 6px;
+        width: 36px;
+        height: 36px;
+        border: none;
+        background: transparent;
+        color: var(--text-muted);
+        cursor: pointer;
+        border-radius: 999px;
+      }
+
+      .filter-row {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+
+      .filter-chip {
+        min-height: 36px;
+        padding: 6px 14px;
+        border-radius: 12px;
+        border: 1px solid var(--outline);
+        background: var(--surface);
+        color: var(--text-muted);
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        white-space: nowrap;
+      }
+
+      .filter-chip.active {
+        background: var(--primary-container);
+        color: var(--on-primary-container);
+        border-color: transparent;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        background: var(--bg);
+        padding: 12px 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        border-bottom: 1px solid var(--outline);
+      }
+
+      .back-btn {
+        width: 42px;
+        height: 42px;
+        border-radius: 999px;
+        border: none;
+        background: transparent;
+        color: var(--text);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .timer-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        padding: 18px;
+      }
+
+      .ring-wrap {
+        position: relative;
+        width: 144px;
+        height: 144px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .ring-label {
+        position: absolute;
+        text-align: center;
+      }
+
+      .timer-digits {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 28px;
+        font-weight: 700;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .timer-status {
+        font-size: 12px;
+        color: var(--text-muted);
+      }
+
+      .btn-row {
+        display: flex;
+        gap: 10px;
+      }
+
+      .btn-primary {
+        min-height: 44px;
+        padding: 10px 18px;
+        border: none;
+        border-radius: 14px;
+        background: var(--primary);
+        color: #ffffff;
+        font-weight: 600;
+        font-size: 14px;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+      }
+
+      .btn-outline {
+        min-height: 44px;
+        padding: 10px 18px;
+        border: 1px solid var(--outline);
+        border-radius: 14px;
+        background: var(--surface);
+        color: var(--primary);
+        font-weight: 600;
+        font-size: 14px;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+      }
+
+      .input-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .field-label {
+        display: block;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--text-muted);
+        margin-bottom: 4px;
+      }
+
+      .field-input {
+        width: 100%;
+        min-height: 44px;
+        border-radius: 12px;
+        border: 1px solid var(--outline);
+        padding: 8px 12px;
+        font-size: 15px;
+        font-family: inherit;
+        outline: none;
+      }
+
+      .field-input:focus {
+        border-color: var(--primary);
+      }
+
+      .bottom-nav {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 70px;
+        background: var(--surface);
+        border-top: 1px solid var(--outline);
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        align-items: center;
+        z-index: 30;
+      }
+
+      .nav-item {
+        border: none;
+        background: transparent;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        height: 100%;
+        cursor: pointer;
+        color: var(--text-muted);
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      .nav-item.active {
+        color: var(--primary);
+      }
+
+      .nav-pill {
+        padding: 4px 16px;
+        border-radius: 999px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .nav-item.active .nav-pill {
+        background: var(--primary-container);
+      }
+
+      .record-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .delete-btn {
+        border: none;
+        background: transparent;
+        color: var(--text-muted);
+        width: 36px;
+        height: 36px;
+        border-radius: 999px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-shell" id="app"></div>
+    <script>
+      const exercises = [
+        {
+          id: 1,
+          name: "Bench Press",
+          muscle: "Dada",
+          muscleGroup: "Dada",
+          targetGuide: "3-4 Set • 8-12 Reps",
+          description:
+            "Berbaring di bench, pegang barbell selebar bahu, turunkan ke dada lalu dorong ke atas dengan kontrol penuh.",
+        },
+        {
+          id: 2,
+          name: "Squat",
+          muscle: "Kaki / Paha",
+          muscleGroup: "Kaki",
+          targetGuide: "4 Set • 8-10 Reps",
+          description:
+            "Berdiri dengan kaki selebar bahu, turunkan pinggul seperti duduk sambil menjaga punggung netral, lalu dorong kembali berdiri tegak.",
+        },
+        {
+          id: 3,
+          name: "Deadlift",
+          muscle: "Punggung / Paha Belakang",
+          muscleGroup: "Punggung",
+          targetGuide: "3 Set • 5-8 Reps",
+          description:
+            "Pegang barbell di lantai selebar bahu, angkat beban dengan menjaga punggung tetap lurus dan dorong pinggul ke depan saat berdiri.",
+        },
+        {
+          id: 4,
+          name: "Pull Up",
+          muscle: "Punggung / Biceps",
+          muscleGroup: "Punggung",
+          targetGuide: "3 Set • 6-12 Reps",
+          description:
+            "Gantung pada pull-up bar dengan genggaman lebih lebar dari bahu, tarik tubuh ke atas hingga dagu melewati bar, lalu turunkan perlahan.",
+        },
+        {
+          id: 5,
+          name: "Shoulder Press",
+          muscle: "Bahu",
+          muscleGroup: "Bahu",
+          targetGuide: "3-4 Set • 10-12 Reps",
+          description:
+            "Pegang dumbbells setinggi bahu dengan siku sedikit ke depan, dorong ke atas hingga lengan hampir lurus, lalu turunkan kembali perlahan.",
+        },
+      ];
+
+      const STORAGE_KEY = "gymskuy_records_v1";
+
+      function loadRecords() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          return raw ? JSON.parse(raw) : [];
+        } catch {
+          return [];
+        }
+      }
+
+      function saveRecords(list) {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+        } catch {}
+      }
+
+      function formatKg(val) {
+        const rounded = Math.round(val * 10) / 10;
+        return rounded % 1 === 0 ? String(Math.round(rounded)) : String(rounded);
+      }
+
+      const state = {
+        tab: "dashboard",
+        detailId: null,
+        searchQuery: "",
+        selectedGroup: "Semua",
+        records: loadRecords(),
+        durationSeconds: 60,
+        timeLeft: 60,
+        isRunning: false,
+        timerInterval: null,
+        formError: "",
+      };
+
+      function stopTimer() {
+        if (state.timerInterval) {
+          clearInterval(state.timerInterval);
+          state.timerInterval = null;
+        }
+        state.isRunning = false;
+      }
+
+      function toggleTimer() {
+        if (state.isRunning) {
+          stopTimer();
+          render();
+          return;
+        }
+        if (state.timeLeft <= 0) {
+          state.timeLeft = state.durationSeconds;
+        }
+        state.isRunning = true;
+        state.timerInterval = setInterval(() => {
+          if (state.timeLeft > 0) {
+            state.timeLeft -= 1;
+            if (state.timeLeft === 0) {
+              stopTimer();
+            }
+            render();
+          }
+        }, 1000);
+        render();
+      }
+
+      function resetTimer(newDuration) {
+        stopTimer();
+        if (typeof newDuration === "number") {
+          state.durationSeconds = newDuration;
+        }
+        state.timeLeft = state.durationSeconds;
+        render();
+      }
+
+      function openDetail(id) {
+        stopTimer();
+        state.detailId = id;
+        state.durationSeconds = 60;
+        state.timeLeft = 60;
+        state.formError = "";
+        render();
+      }
+
+      function closeDetail() {
+        stopTimer();
+        state.detailId = null;
+        render();
+      }
+
+      function switchTab(tab) {
+        stopTimer();
+        state.detailId = null;
+        state.tab = tab;
+        render();
+      }
+
+      function deleteRecord(id) {
+        state.records = state.records.filter((r) => r.id !== id);
+        saveRecords(state.records);
+        render();
+      }
+
+      function addRecord(exerciseId) {
+        const repsEl = document.getElementById("reps-input");
+        const bebanEl = document.getElementById("beban-input");
+        const reps = parseInt((repsEl?.value || "").trim(), 10);
+        const beban = parseFloat((bebanEl?.value || "").trim().replace(",", "."));
+        if (!reps || reps <= 0 || Number.isNaN(beban) || beban < 0) {
+          state.formError = "Masukkan jumlah reps (> 0) dan beban yang valid.";
+          render();
+          return;
+        }
+        const now = new Date();
+        const tanggal = now.toLocaleDateString("id-ID", {
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+        }) + ", " + now.toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" });
+        state.records = [
+          { id: Date.now(), exerciseId, reps, beban, tanggal },
+          ...state.records,
+        ];
+        saveRecords(state.records);
+        state.formError = "";
+        render();
+      }
+
+      const dumbbellSvg = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6.5 6.5 11 11"/><path d="m21 21-1-1"/><path d="m3 3 1 1"/><path d="m18 22 4-4"/><path d="m2 6 4-4"/><path d="m3 10 7-7"/><path d="m14 21 7-7"/></svg>`;
+
+      function renderDashboard() {
+        const totalSets = state.records.length;
+        const totalVolume = state.records.reduce((acc, r) => acc + r.reps * r.beban, 0);
+        const activeCount = new Set(state.records.map((r) => r.exerciseId)).size;
+        const maxWeight = state.records.reduce((m, r) => Math.max(m, r.beban), 0);
+        const recent = state.records.slice(0, 4);
+
+        return `
+          <div class="scroll-content">
+            <div class="brand-header">
+              <div>
+                <div class="brand-title">GYMSKUY</div>
+                <div class="subtitle">Ringkasan latihan & performa harian</div>
+              </div>
+              <div class="avatar-badge">${dumbbellSvg}</div>
+            </div>
+
+            <div class="hero-card">
+              <span class="hero-tag">Mode Latihan Offline</span>
+              <div class="hero-title">Siap Latihan Hari Ini?</div>
+              <div class="hero-desc">
+                ${
+                  totalSets === 0
+                    ? `Pilih dari ${exercises.length} gerakan utama, pakai timer istirahat, dan catat progres beban Anda.`
+                    : `Anda sudah mencatat ${totalSets} set dengan total volume ${formatKg(totalVolume)} kg.`
+                }
+              </div>
+              <button class="hero-btn" onclick="switchTab('exercises')">▶ Mulai Latihan</button>
+            </div>
+
+            <div>
+              <div class="section-title" style="margin-bottom: 10px;">Statistik Latihan</div>
+              <div class="stats-grid">
+                <div class="stat-card">
+                  <div class="stat-top">
+                    <span>Total Set</span>
+                    <div class="stat-icon" style="background: var(--primary-container); color: var(--primary);">🏋</div>
+                  </div>
+                  <div class="stat-value">${totalSets}</div>
+                  <div class="stat-sub">Set tercatat</div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-top">
+                    <span>Total Volume</span>
+                    <div class="stat-icon" style="background: var(--secondary-container); color: var(--secondary);">↗</div>
+                  </div>
+                  <div class="stat-value">${formatKg(totalVolume)} kg</div>
+                  <div class="stat-sub">Reps × Beban</div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-top">
+                    <span>Gerakan Aktif</span>
+                    <div class="stat-icon" style="background: var(--secondary-container); color: var(--secondary);">✓</div>
+                  </div>
+                  <div class="stat-value">${activeCount} / ${exercises.length}</div>
+                  <div class="stat-sub">Variasi latihan</div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-top">
+                    <span>Rekor Beban</span>
+                    <div class="stat-icon" style="background: var(--surface-variant); color: var(--tertiary);">🏆</div>
+                  </div>
+                  <div class="stat-value">${formatKg(maxWeight)} kg</div>
+                  <div class="stat-sub">Beban tertinggi</div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div class="section-row" style="margin-bottom: 8px;">
+                <div class="section-title">Akses Cepat Latihan</div>
+                <button class="link-btn" onclick="switchTab('exercises')">Semua</button>
+              </div>
+              <div class="carousel">
+                ${exercises
+                  .map((ex) => {
+                    const count = state.records.filter((r) => r.exerciseId === ex.id).length;
+                    return `
+                      <button class="quick-card" onclick="openDetail(${ex.id})">
+                        <span class="chip">${ex.muscleGroup}</span>
+                        <div class="exercise-name">${ex.name}</div>
+                        <div class="stat-sub">${ex.targetGuide}</div>
+                        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:4px;font-size:12px;font-weight:700;color:var(--primary);">
+                          <span>${count > 0 ? `${count} set` : "Buka detail"}</span>
+                          <span>→</span>
+                        </div>
+                      </button>
+                    `;
+                  })
+                  .join("")}
+              </div>
+            </div>
+
+            <div>
+              <div class="section-row" style="margin-bottom: 8px;">
+                <div class="section-title">Aktivitas Terbaru</div>
+                ${
+                  state.records.length > 0
+                    ? `<button class="link-btn" onclick="switchTab('history')">Lihat Semua</button>`
+                    : ""
+                }
+              </div>
+              ${
+                recent.length === 0
+                  ? `<div class="card" style="text-align:center;padding:22px;">
+                      <div style="font-weight:700;font-size:14.5px;">Belum ada set yang dicatat</div>
+                      <div class="subtitle" style="margin-top:4px;">Buka salah satu latihan untuk menggunakan timer istirahat dan mencatat set Anda.</div>
+                    </div>`
+                  : `<div style="display:flex;flex-direction:column;gap:8px;">
+                      ${recent
+                        .map((rec) => {
+                          const ex = exercises.find((e) => e.id === rec.exerciseId);
+                          return `
+                            <div class="card record-row" style="cursor:pointer;" onclick="openDetail(${rec.exerciseId})">
+                              <div>
+                                <div style="font-weight:700;font-size:14.5px;">${ex ? ex.name : "Latihan"}</div>
+                                <div class="subtitle">${ex ? ex.muscle : "-"} • ${rec.tanggal}</div>
+                              </div>
+                              <div style="text-align:right;">
+                                <div style="font-weight:700;color:var(--primary);font-size:14px;">${rec.reps} reps</div>
+                                <div class="subtitle">${formatKg(rec.beban)} kg</div>
+                              </div>
+                            </div>
+                          `;
+                        })
+                        .join("")}
+                    </div>`
+              }
+            </div>
+          </div>
+        `;
+      }
+
+      function renderExercises() {
+        const groups = ["Semua", "Dada", "Kaki", "Punggung", "Bahu"];
+        const q = state.searchQuery.trim().toLowerCase();
+        const filtered = exercises.filter((ex) => {
+          const matchQ =
+            ex.name.toLowerCase().includes(q) || ex.muscle.toLowerCase().includes(q);
+          const matchG =
+            state.selectedGroup === "Semua" || ex.muscleGroup === state.selectedGroup;
+          return matchQ && matchG;
+        });
+
+        return `
+          <div class="scroll-content">
+            <div>
+              <div class="brand-title">Daftar Latihan Gym</div>
+              <div class="subtitle">Pilih latihan untuk panduan gerakan, timer & catatan set</div>
+            </div>
+
+            <div class="search-wrap">
+              <span class="search-icon">🔍</span>
+              <input
+                id="search-box"
+                class="search-input"
+                type="text"
+                placeholder="Cari latihan atau target otot..."
+                value="${state.searchQuery.replace(/"/g, "&quot;")}"
+                oninput="state.searchQuery = this.value; renderPreserveSearch();"
+              />
+              ${
+                state.searchQuery
+                  ? `<button class="clear-btn" onclick="state.searchQuery=''; render();">✕</button>`
+                  : ""
+              }
+            </div>
+
+            <div class="filter-row">
+              ${groups
+                .map(
+                  (g) => `
+                  <button
+                    class="filter-chip ${state.selectedGroup === g ? "active" : ""}"
+                    onclick="state.selectedGroup='${g}'; render();"
+                  >${g}</button>`
+                )
+                .join("")}
+            </div>
+
+            <div id="exercise-list" style="display:flex;flex-direction:column;gap:10px;">
+              ${
+                filtered.length === 0
+                  ? `<div class="card" style="text-align:center;padding:24px;">
+                      <div style="font-weight:700;">Latihan tidak ditemukan</div>
+                      <div class="subtitle" style="margin-top:4px;">Coba kata kunci atau kategori otot yang berbeda.</div>
+                    </div>`
+                  : filtered
+                      .map((ex) => {
+                        const count = state.records.filter((r) => r.exerciseId === ex.id).length;
+                        return `
+                          <button class="exercise-card" onclick="openDetail(${ex.id})">
+                            <div class="exercise-icon">${dumbbellSvg}</div>
+                            <div class="exercise-body">
+                              <div class="exercise-name-row">
+                                <span class="exercise-name">${ex.name}</span>
+                                ${
+                                  count > 0
+                                    ? `<span class="chip teal">${count} set</span>`
+                                    : ""
+                                }
+                              </div>
+                              <div class="exercise-meta">Otot: ${ex.muscle} • ${ex.targetGuide}</div>
+                              <div class="exercise-desc">${ex.description}</div>
+                            </div>
+                            <span style="color:var(--text-muted);font-size:18px;">›</span>
+                          </button>
+                        `;
+                      })
+                      .join("")
+              }
+            </div>
+          </div>
+        `;
+      }
+
+      function renderHistory() {
+        const totalVolume = state.records.reduce((acc, r) => acc + r.reps * r.beban, 0);
+        return `
+          <div class="scroll-content">
+            <div>
+              <div class="brand-title">Riwayat Latihan</div>
+              <div class="subtitle">Catatan set & beban yang tersimpan di perangkat</div>
+            </div>
+
+            <div class="card" style="background:var(--primary-container);border:none;display:flex;justify-content:space-between;">
+              <div>
+                <div style="font-size:12px;color:var(--on-primary-container);opacity:0.8;">Total Tercatat</div>
+                <div style="font-size:20px;font-weight:700;color:var(--on-primary-container);">${state.records.length} Set</div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-size:12px;color:var(--on-primary-container);opacity:0.8;">Akumulasi Volume</div>
+                <div style="font-size:20px;font-weight:700;color:var(--on-primary-container);">${formatKg(totalVolume)} kg</div>
+              </div>
+            </div>
+
+            ${
+              state.records.length === 0
+                ? `<div class="card" style="text-align:center;padding:28px;display:flex;flex-direction:column;gap:10px;align-items:center;">
+                    <div style="font-weight:700;font-size:16px;">Riwayat Masih Kosong</div>
+                    <div class="subtitle">Catat jumlah repetisi dan beban saat latihan agar progres Anda terlihat di sini.</div>
+                    <button class="btn-primary" onclick="switchTab('exercises')">Pilih Latihan</button>
+                  </div>`
+                : `<div style="display:flex;flex-direction:column;gap:10px;">
+                    ${state.records
+                      .map((rec) => {
+                        const ex = exercises.find((e) => e.id === rec.exerciseId);
+                        const vol = rec.reps * rec.beban;
+                        return `
+                          <div class="card record-row">
+                            <div style="flex:1;cursor:pointer;" onclick="openDetail(${rec.exerciseId})">
+                              <div style="font-weight:700;font-size:14.5px;">${ex ? ex.name : "Latihan"}</div>
+                              <div style="font-size:13px;color:var(--primary);font-weight:600;margin-top:2px;">
+                                ${rec.reps} reps × ${formatKg(rec.beban)} kg • Vol ${formatKg(vol)} kg
+                              </div>
+                              <div class="subtitle">${rec.tanggal}</div>
+                            </div>
+                            <button class="delete-btn" onclick="deleteRecord(${rec.id})" title="Hapus">🗑</button>
+                          </div>
+                        `;
+                      })
+                      .join("")}
+                  </div>`
+            }
+          </div>
+        `;
+      }
+
+      function renderDetail() {
+        const ex = exercises.find((e) => e.id === state.detailId) || exercises[0];
+        const exRecords = state.records.filter((r) => r.exerciseId === ex.id);
+        const mins = Math.floor(state.timeLeft / 60);
+        const secs = state.timeLeft % 60;
+        const formattedTime = `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+        const progress = state.durationSeconds > 0 ? state.timeLeft / state.durationSeconds : 0;
+        const radius = 60;
+        const circumference = 2 * Math.PI * radius;
+        const dashOffset = circumference * (1 - progress);
+
+        return `
+          <div class="topbar">
+            <button class="back-btn" onclick="closeDetail()" aria-label="Kembali">←</button>
+            <h1 style="font-size:18px;font-weight:700;">${ex.name}</h1>
+          </div>
+          <div class="scroll-content no-nav">
+            <div class="card" style="display:flex;flex-direction:column;gap:10px;">
+              <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                <span class="chip">Target: ${ex.muscle}</span>
+                <span class="chip teal">${ex.targetGuide}</span>
+              </div>
+              <h2 style="font-size:21px;font-weight:700;">${ex.name}</h2>
+              <div style="font-size:13.5px;font-weight:700;color:var(--primary);">Cara Melakukan:</div>
+              <p style="font-size:14.5px;line-height:1.55;color:var(--text-muted);">${ex.description}</p>
+            </div>
+
+            <div class="card timer-card">
+              <div style="font-weight:700;font-size:16px;">Timer Istirahat</div>
+              <div style="display:flex;gap:8px;">
+                ${[30, 60, 90]
+                  .map(
+                    (preset) => `
+                    <button
+                      class="filter-chip ${state.durationSeconds === preset ? "active" : ""}"
+                      onclick="resetTimer(${preset})"
+                    >${preset} dtk</button>`
+                  )
+                  .join("")}
+              </div>
+
+              <div class="ring-wrap">
+                <svg width="144" height="144" viewBox="0 0 144 144" style="transform: rotate(-90deg);">
+                  <circle cx="72" cy="72" r="${radius}" fill="none" stroke="var(--surface-variant)" stroke-width="10" />
+                  <circle
+                    cx="72"
+                    cy="72"
+                    r="${radius}"
+                    fill="none"
+                    stroke="var(--primary)"
+                    stroke-width="10"
+                    stroke-linecap="round"
+                    stroke-dasharray="${circumference}"
+                    stroke-dashoffset="${dashOffset}"
+                  />
+                </svg>
+                <div class="ring-label">
+                  <div class="timer-digits">${formattedTime}</div>
+                  <div class="timer-status">${
+                    state.isRunning ? "Berjalan" : state.timeLeft === 0 ? "Selesai" : "Siap"
+                  }</div>
+                </div>
+              </div>
+
+              <div class="btn-row">
+                <button class="btn-primary" onclick="toggleTimer()">
+                  ${state.isRunning ? "⏸ Jeda" : "▶ Mulai"}
+                </button>
+                <button class="btn-outline" onclick="resetTimer()">↻ Reset</button>
+              </div>
+            </div>
+
+            <div class="card" style="display:flex;flex-direction:column;gap:12px;">
+              <div style="font-weight:700;font-size:16px;">Catat Set Latihan</div>
+              <div class="input-grid">
+                <div>
+                  <label class="field-label" for="reps-input">Reps</label>
+                  <input id="reps-input" class="field-input" type="number" inputmode="numeric" placeholder="10" />
+                </div>
+                <div>
+                  <label class="field-label" for="beban-input">Beban (kg)</label>
+                  <input id="beban-input" class="field-input" type="number" step="0.5" inputmode="decimal" placeholder="40" />
+                </div>
+              </div>
+              ${
+                state.formError
+                  ? `<div style="font-size:12.5px;color:var(--error);font-weight:600;">${state.formError}</div>`
+                  : ""
+              }
+              <button class="btn-primary" style="width:100%;" onclick="addRecord(${ex.id})">＋ Simpan Set</button>
+            </div>
+
+            ${
+              exRecords.length > 0
+                ? `<div style="display:flex;flex-direction:column;gap:8px;">
+                    <div class="section-title">Catatan Set ${ex.name} (${exRecords.length})</div>
+                    ${exRecords
+                      .map(
+                        (rec) => `
+                        <div class="card record-row">
+                          <div>
+                            <div style="font-weight:700;font-size:14.5px;">${rec.reps} reps × ${formatKg(rec.beban)} kg</div>
+                            <div class="subtitle">${rec.tanggal}</div>
+                          </div>
+                          <button class="delete-btn" onclick="deleteRecord(${rec.id})" title="Hapus">🗑</button>
+                        </div>`
+                      )
+                      .join("")}
+                  </div>`
+                : ""
+            }
+          </div>
+        `;
+      }
+
+      function renderBottomNav() {
+        return `
+          <nav class="bottom-nav">
+            <button class="nav-item ${state.tab === "dashboard" ? "active" : ""}" onclick="switchTab('dashboard')">
+              <span class="nav-pill">📊</span>
+              <span>Dashboard</span>
+            </button>
+            <button class="nav-item ${state.tab === "exercises" ? "active" : ""}" onclick="switchTab('exercises')">
+              <span class="nav-pill">🏋</span>
+              <span>Latihan</span>
+            </button>
+            <button class="nav-item ${state.tab === "history" ? "active" : ""}" onclick="switchTab('history')">
+              <span class="nav-pill">🕒</span>
+              <span>Riwayat</span>
+            </button>
+          </nav>
+        `;
+      }
+
+      function renderPreserveSearch() {
+        const prev = document.getElementById("search-box");
+        const pos = prev ? prev.selectionStart : state.searchQuery.length;
+        render();
+        const next = document.getElementById("search-box");
+        if (next) {
+          next.focus();
+          next.setSelectionRange(pos, pos);
+        }
+      }
+
+      function render() {
+        const root = document.getElementById("app");
+        if (state.detailId !== null) {
+          root.innerHTML = renderDetail();
+          return;
+        }
+        let content = "";
+        if (state.tab === "dashboard") content = renderDashboard();
+        else if (state.tab === "exercises") content = renderExercises();
+        else content = renderHistory();
+
+        root.innerHTML = content + renderBottomNav();
+      }
+
+      render();
+    </script>
+  </body>
+</html>

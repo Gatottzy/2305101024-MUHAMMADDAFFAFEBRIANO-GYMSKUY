@@ -1,0 +1,5 @@
+{
+  "name": "AplikasiGym",
+  "description": "Aplikasi daftar latihan gym offline dengan fitur pencarian latihan, panduan gerakan, dan timer istirahat 60 detik.",
+  "requestFramePermissions": []
+}
