@@ -43,7 +43,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.aplikasigym.ui.theme.AplikasiGymTheme
 
 @Composable
 fun HomeScreen(
@@ -276,5 +278,18 @@ private fun ExerciseItemCard(
                 tint = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
+    }
+}
+
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+private fun HomeScreenPreview() {
+    AplikasiGymTheme {
+        HomeScreen(
+            records = listOf(
+                ExerciseRecord(1L, 1, 10, 60f, "16 Nov 2026, 08:30")
+            ),
+            onExerciseClick = {}
+        )
     }
 }

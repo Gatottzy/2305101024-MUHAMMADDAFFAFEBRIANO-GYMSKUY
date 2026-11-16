@@ -56,14 +56,15 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.aplikasigym.ui.theme.AplikasiGymTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailScreen(
     exerciseId: Int,
@@ -73,6 +74,40 @@ fun DetailScreen(
     val exercise = exerciseList.find { it.id == exerciseId } ?: exerciseList.first()
     val records by dao.getRecordsForExercise(exercise.id).collectAsState(initial = emptyList())
     val scope = rememberCoroutineScope()
+
+    DetailContent(
+        exercise = exercise,
+        records = records,
+        onBackClick = onBackClick,
+        onSaveRecord = { reps, beban, tanggal ->
+            scope.launch {
+                dao.insertRecord(
+                    ExerciseRecord(
+                        exerciseId = exercise.id,
+                        reps = reps,
+                        beban = beban,
+                        tanggal = tanggal
+                    )
+                )
+            }
+        },
+        onDeleteRecord = { record ->
+            scope.launch {
+                dao.deleteRecord(record)
+            }
+        }
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun DetailContent(
+    exercise: Exercise,
+    records: List<ExerciseRecord>,
+    onBackClick: () -> Unit,
+    onSaveRecord: (reps: Int, beban: Float, tanggal: String) -> Unit,
+    onDeleteRecord: (ExerciseRecord) -> Unit
+) {
 
     // State untuk timer istirahat (default 60 detik)
     var durationSeconds by remember { mutableIntStateOf(60) }
@@ -374,19 +409,10 @@ fun DetailScreen(
                                 } else {
                                     val today = SimpleDateFormat("dd MMM yyyy, HH:mm", Locale.getDefault())
                                         .format(Date())
-                                    scope.launch {
-                                        dao.insertRecord(
-                                            ExerciseRecord(
-                                                exerciseId = exercise.id,
-                                                reps = reps,
-                                                beban = beban,
-                                                tanggal = today
-                                            )
-                                        )
-                                        repsInput = ""
-                                        bebanInput = ""
-                                        formError = null
-                                    }
+                                    onSaveRecord(reps, beban, today)
+                                    repsInput = ""
+                                    bebanInput = ""
+                                    formError = null
                                 }
                             },
                             modifier = Modifier.fillMaxWidth(),
@@ -439,11 +465,7 @@ fun DetailScreen(
                                 )
                             }
                             IconButton(
-                                onClick = {
-                                    scope.launch {
-                                        dao.deleteRecord(record)
-                                    }
-                                }
+                                onClick = { onDeleteRecord(record) }
                             ) {
                                 Icon(
                                     imageVector = Icons.Rounded.DeleteOutline,
@@ -460,5 +482,21 @@ fun DetailScreen(
                 Spacer(modifier = Modifier.height(12.dp))
             }
         }
+    }
+}
+
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+private fun DetailScreenPreview() {
+    AplikasiGymTheme {
+        DetailContent(
+            exercise = exerciseList.first(),
+            records = listOf(
+                ExerciseRecord(1L, 1, 10, 60f, "16 Nov 2026, 08:30")
+            ),
+            onBackClick = {},
+            onSaveRecord = { _, _, _ -> },
+            onDeleteRecord = {}
+        )
     }
 }

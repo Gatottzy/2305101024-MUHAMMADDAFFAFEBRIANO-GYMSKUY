@@ -45,7 +45,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.aplikasigym.ui.theme.AplikasiGymTheme
 import com.example.aplikasigym.ui.theme.IndigoDark
 import com.example.aplikasigym.ui.theme.IndigoPrimary
 import kotlin.math.roundToInt
@@ -532,4 +534,20 @@ private fun RecentRecordRow(
 fun formatKg(value: Float): String {
     val rounded = (value * 10f).roundToInt() / 10f
     return if (rounded % 1f == 0f) rounded.toInt().toString() else rounded.toString()
+}
+
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+private fun DashboardScreenPreview() {
+    AplikasiGymTheme {
+        DashboardScreen(
+            records = listOf(
+                ExerciseRecord(1L, 1, 10, 60f, "16 Nov 2026, 08:30"),
+                ExerciseRecord(2L, 2, 8, 80f, "16 Nov 2026, 08:45")
+            ),
+            onExerciseClick = {},
+            onNavigateToExercises = {},
+            onNavigateToHistory = {}
+        )
+    }
 }

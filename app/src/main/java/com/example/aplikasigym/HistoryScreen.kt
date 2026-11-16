@@ -34,7 +34,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.aplikasigym.ui.theme.AplikasiGymTheme
 import kotlinx.coroutines.launch
 
 @Composable
@@ -45,6 +47,25 @@ fun HistoryScreen(
     onBrowseExercises: () -> Unit
 ) {
     val scope = rememberCoroutineScope()
+    HistoryContent(
+        records = records,
+        onExerciseClick = onExerciseClick,
+        onBrowseExercises = onBrowseExercises,
+        onDeleteRecord = { record ->
+            scope.launch {
+                dao.deleteRecord(record)
+            }
+        }
+    )
+}
+
+@Composable
+fun HistoryContent(
+    records: List<ExerciseRecord>,
+    onExerciseClick: (Int) -> Unit,
+    onBrowseExercises: () -> Unit,
+    onDeleteRecord: (ExerciseRecord) -> Unit
+) {
     val totalVolume = records.sumOf { (it.reps * it.beban).toDouble() }.toFloat()
 
     Column(
@@ -215,11 +236,7 @@ fun HistoryScreen(
                             }
 
                             IconButton(
-                                onClick = {
-                                    scope.launch {
-                                        dao.deleteRecord(record)
-                                    }
-                                }
+                                onClick = { onDeleteRecord(record) }
                             ) {
                                 Icon(
                                     imageVector = Icons.Rounded.DeleteOutline,
@@ -232,5 +249,21 @@ fun HistoryScreen(
                 }
             }
         }
+    }
+}
+
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+private fun HistoryScreenPreview() {
+    AplikasiGymTheme {
+        HistoryContent(
+            records = listOf(
+                ExerciseRecord(1L, 1, 10, 60f, "16 Nov 2026, 08:30"),
+                ExerciseRecord(2L, 3, 6, 100f, "16 Nov 2026, 09:00")
+            ),
+            onExerciseClick = {},
+            onBrowseExercises = {},
+            onDeleteRecord = {}
+        )
     }
 }
