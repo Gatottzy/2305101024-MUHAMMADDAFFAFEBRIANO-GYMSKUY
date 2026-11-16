@@ -4,7 +4,7 @@
 
 - Nama: MUHAMMADDAFFAFEBRIANO
 - NIM: 2305101024
-- Kelas: [Isi Kelas Anda]
+- Kelas: 7B
 - Program Studi: Teknik Informatika
 - Mata Kuliah: Pemrograman Mobile
 - Tahun Akademik: 2026/2027
