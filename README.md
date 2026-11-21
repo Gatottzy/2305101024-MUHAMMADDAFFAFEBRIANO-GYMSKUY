@@ -72,9 +72,14 @@ Struktur direktori proyek Android dan acuan pengumpulan UTS:
 
 Dokumentasi tampilan aplikasi disimpan pada folder `uts/screenshots/`:
 
-- Halaman Dashboard: `uts/screenshots/halaman-utama.png`
-- Halaman Daftar Latihan dan Pencarian: `uts/screenshots/halaman-kedua.png`
-- Halaman Detail Latihan, Timer Istirahat, dan Riwayat: `uts/screenshots/hasil-implementasi.png`
+### 1. Halaman Utama (Dashboard)
+![Halaman Utama Dashboard GYMSKUY](uts/screenshots/halaman-utama.png)
+
+### 2. Halaman Kedua (Daftar Latihan Gym)
+![Halaman Daftar Latihan Gym](uts/screenshots/halaman-kedua.png)
+
+### 3. Hasil Implementasi (Riwayat Latihan)
+![Halaman Riwayat Latihan](uts/screenshots/hasil-implementasi.png)
 
 ## File APK
 
